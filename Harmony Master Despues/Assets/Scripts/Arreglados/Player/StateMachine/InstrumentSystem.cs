@@ -28,8 +28,9 @@ public class InstrumentSystem : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-        sinteScript = GetComponent<Sintetizador>();
-        clariScript = GetComponent<Clarinete>();
+        sinteScript = GetComponentInChildren<Sintetizador>();
+        clariScript = GetComponentInChildren<Clarinete>();
+        
     }
 
     private void Start()

@@ -16,7 +16,6 @@ public class ClarinetState : State
 
         InsSystem.SinteScript.enabled = false;
         InsSystem.ClariScript.enabled = true;
-
         return base.Clari();
     }
 }
