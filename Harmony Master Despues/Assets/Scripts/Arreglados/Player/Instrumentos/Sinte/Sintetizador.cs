@@ -24,6 +24,7 @@ public class Sintetizador : Instrumento
     {
         audioSource = GetComponentInParent<AudioSource>();
         CoolDown = cooldownLocal;
+        recarga = GetComponent<RecargarInstrumento>();
     }
 
     void Update()
@@ -48,12 +49,16 @@ public class Sintetizador : Instrumento
             }
             else
             {
-                timer += Time.deltaTime;
-                if (timer >= CoolDown)
-                {
-                    Recargar(municionInicial);
-                    timer = 0.0f;
-                }
+                recarga.Recargar(municionInicial);
+            }
+
+            if (MunicionActual == municionInicial)
+            {
+                Recargado = true;
+            }
+            else
+            {
+                Recargado = false;
             }
         }
         else
