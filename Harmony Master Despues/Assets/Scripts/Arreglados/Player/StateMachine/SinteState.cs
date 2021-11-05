@@ -16,7 +16,6 @@ public class SinteState : State
 
         InsSystem.SinteScript.enabled = true;
         InsSystem.ClariScript.enabled = false;
-
         return base.Synthe();
     }
 }
