@@ -5,52 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class LevelCompleteManager : MonoBehaviour
 {
-    public Enemy_vida enemyVida;
+    [SerializeField] ObrDestruction orb;
+    [SerializeField] Animator anim;
 
-    Animator anim;
-    public float tiempo;
-    public bool empezatiem;
-    public bool Sonidito;
-
-    public AudioClip yey;
-    public AudioSource level;
-
-    public AudioSource musicalv1;
+    [SerializeField] AudioClip winSound;
+    [SerializeField] AudioSource audioEffect;
+    AudioSource levelAudio;
+    private bool sonido = false;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-        level = GetComponent<AudioSource>();
+        levelAudio = GetComponent<AudioSource>();
     }
 
-
-
-    void Update()
+    void Start()
     {
-        if (enemyVida.hp <= 0)
-        {
-            anim.SetTrigger("LevelComplete");
-            empezatiem = true;
-            Sonidito = true;
-            level.clip = yey;
-            if (!level.isPlaying) level.Play();            
+        orb.destroyed += Win;
+    }
 
-            if (musicalv1 != null)
-            {
-                musicalv1.volume = 0f;
-            }
-        }
-        else
-        {
+    public void OnDestroy()
+    {
+        orb.destroyed -= Win;
+    }
 
-        }
-        if (empezatiem)
+    private void Win()
+    {
+        anim.SetTrigger("LevelComplete");
+        audioEffect.clip = winSound;
+
+        if (!audioEffect.isPlaying && !sonido)
         {
-            tiempo += Time.deltaTime;
-            if (tiempo >= 2)
-            {
-                SceneManager.LoadScene("carga 1", LoadSceneMode.Single);
-            }
+            sonido = true;
+            audioEffect.Play();
+        }
+
+        if (levelAudio != null)
+        {
+            levelAudio.volume = 0f;
         }
     }
+
 }
