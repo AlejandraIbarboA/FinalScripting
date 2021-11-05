@@ -5,30 +5,31 @@ using UnityEngine.UI;
 
 public class Sintetizador : MonoBehaviour
 {
-    public GameObject proyectil;
-    public Transform point;
-    public Image sintecooldownimage;
-    public Text cargastext;
+    [SerializeField] GameObject proyectil;
+    [SerializeField] Transform point;
+    [SerializeField] Image sintecooldownimage;
+    [SerializeField] Text cargastext;
 
     private float TimeBTWShots;
-    public float StartTimeBTWShots;
+    [SerializeField] float StartTimeBTWShots;
 
-    public AudioClip sintesound;
+    [SerializeField] AudioClip sintesound;
     AudioSource Sinte;
 
-    public float cargas;
-    public float Municion;
+    [SerializeField] float cargas;
+    [SerializeField] float Municion;
     private bool puede;
     private bool sinCooldown;
 
-    public float tiempo = 0.0f;
-    public float tiempoRecarga = 4.0f;
+    [SerializeField] float tiempo = 0.0f;
+    [SerializeField] float tiempoRecarga = 4.0f;
 
 
     private void Awake()
     {
         cargastext.text = cargas.ToString();
     }
+
     private void Start()
     {
         Sinte = GetComponent<AudioSource>();
