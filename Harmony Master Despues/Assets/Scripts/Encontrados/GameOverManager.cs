@@ -5,49 +5,37 @@ using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
 {
-  
-    
-    public PlayerHealth playerHealth;
+    [SerializeField] PlayerHealth playerHealth;
+    [SerializeField] Animator hudAnim;
 
-    Animator anim;
+    [SerializeField] AudioClip gameoverSound;
+    [SerializeField] AudioSource audioEffect;
+    AudioSource levelAudio;
 
-    public bool GameOver;
-
-    public AudioClip risajaja;
-    AudioSource final;
-    
-    public musicalv1 musicalv1;
+    private bool sonido = false;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-        final = GetComponent<AudioSource>();
-
+        levelAudio = GetComponent<AudioSource>();
     }
-
-    private void Start()
-    {
-    }
-
 
     void Update()
     {
+        if (playerHealth.cmurio == true)
+        {
+            hudAnim.SetBool("GameOver", true);
+            audioEffect.clip = gameoverSound;
 
-      if (playerHealth.cmurio==true)
-       {
-
-            GameOver = true;
-            anim.SetBool("GameOver", GameOver);
-            final.clip = risajaja;
-            
-            if(!final.isPlaying)final.Play();
-
-            if (musicalv1 != null)
+            if (!audioEffect.isPlaying && !sonido)
             {
-                musicalv1.nivel1.volume = 0f;
+                audioEffect.Play();
+                sonido = true;
+            }
+
+            if (levelAudio != null)
+            {
+                levelAudio.pitch = 0.6f;
             }
         }
-      
-
     }
 }

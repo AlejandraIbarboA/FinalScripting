@@ -6,7 +6,7 @@ public class ZonaSecreta : MonoBehaviour
 {
     public GameObject zona;
     public GameObject zona2;
-    public musicalv1 musicalv1;
+    public AudioSource musicalv1;
 
     public AudioClip suspense;
     AudioSource miedo;
@@ -26,7 +26,7 @@ public class ZonaSecreta : MonoBehaviour
 
             if (musicalv1 != null)
             {
-                musicalv1.nivel1.volume = 0f;
+                musicalv1.volume = 0f;
             }
             miedo.clip = suspense;
             miedo.volume = 1f;
@@ -43,7 +43,7 @@ public class ZonaSecreta : MonoBehaviour
 
             if (musicalv1 != null)
             {
-                musicalv1.nivel1.volume = 1f;
+                musicalv1.volume = 1f;
             }
         }
     }

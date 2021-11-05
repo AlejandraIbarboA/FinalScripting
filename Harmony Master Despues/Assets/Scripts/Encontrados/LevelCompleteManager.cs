@@ -15,7 +15,7 @@ public class LevelCompleteManager : MonoBehaviour
     public AudioClip yey;
     public AudioSource level;
 
-    public musicalv1 musicalv1;
+    public AudioSource musicalv1;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class LevelCompleteManager : MonoBehaviour
 
             if (musicalv1 != null)
             {
-                musicalv1.nivel1.volume = 0f;
+                musicalv1.volume = 0f;
             }
         }
         else
