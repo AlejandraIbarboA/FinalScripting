@@ -24,6 +24,7 @@ public class Clarinete : Instrumento
     {      
         audioSource = GetComponentInParent<AudioSource>();
         CoolDown = cooldownLocal;
+        recarga = GetComponent<RecargarInstrumento>();
     }
 
     void Update()
@@ -48,12 +49,15 @@ public class Clarinete : Instrumento
             }
             else
             {
-                timer += Time.deltaTime;
-                if (timer >= CoolDown)
-                {
-                    Recargar(municionInicial);
-                    timer = 0.0f;
-                }
+                recarga.Recargar(municionInicial);
+            }
+            if (MunicionActual == municionInicial)
+            {
+                Recargado = true;
+            }
+            else
+            {
+                Recargado = false;
             }
         }
         else
@@ -68,7 +72,7 @@ public class Clarinete : Instrumento
         Instantiate(proyectil, point.position, transform.rotation);
         audioSource.clip = sound;
         audioSource.Play();
-        municionInicial--;
+        MunicionActual--;
         TimeBTWShots = StartTimeBTWShots;
     }
 }
