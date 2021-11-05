@@ -15,6 +15,7 @@ TagManager:
   - sandwich
   - limite
   - caja
+  - interact
   layers:
   - Default
   - TransparentFX

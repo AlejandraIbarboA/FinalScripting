@@ -32,7 +32,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 17.115, y: 0.678, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 982904543959418254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -219,7 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20969e3dd71781348ba657deed8fc9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letro: {fileID: 0}
+  letro: {fileID: 8176463898488728197, guid: 8159e040c61d9c942953e1f24d967014, type: 3}
+  point: {fileID: 982904543959418254}
 --- !u!95 &5099121511608619327
 Animator:
   serializedVersion: 3
@@ -248,11 +250,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 3078318630325373504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40287c7fc55dfb04a829ccc761ca47b2, type: 3}
+  m_Script: {fileID: 11500000, guid: d13fe13c224aba84aa7d878048afc9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  dialogos: []
   poderHablar: 0
+--- !u!1 &4127413412276060400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 982904543959418254}
+  m_Layer: 0
+  m_Name: LetreroPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &982904543959418254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127413412276060400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.189, y: 0.222, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2810661592414304238}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

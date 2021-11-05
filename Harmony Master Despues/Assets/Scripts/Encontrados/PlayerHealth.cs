@@ -58,7 +58,6 @@ public class PlayerHealth : MonoBehaviour
             audio.Play();
             damageImage.color = flashColour;
         }
-
         else
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
@@ -86,6 +85,11 @@ public class PlayerHealth : MonoBehaviour
         damaged = true;
         currentHealth = Mathf.Clamp(currentHealth - attackDamage, 0, startingHealth);
         currentHealth -= attackDamage;
+    }
+
+    public void Heal(int healAmount)
+    {
+        currentHealth += healAmount;
     }
 
     public void RestartLevel()

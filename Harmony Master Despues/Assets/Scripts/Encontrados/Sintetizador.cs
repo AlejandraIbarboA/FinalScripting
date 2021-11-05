@@ -38,7 +38,7 @@ public class Sintetizador : MonoBehaviour
 
     void Update()
     {
-
+        cargastext.text = cargas.ToString();
         if (TimeBTWShots <= 0)
         {
             if (cargas >= 1)
@@ -89,6 +89,11 @@ public class Sintetizador : MonoBehaviour
 
     }
 
+    public void Recargar(int municion)
+    {
+        cargas += municion;
+    }
+
     void disparito()
     {
 
@@ -98,7 +103,7 @@ public class Sintetizador : MonoBehaviour
         Sinte.clip = sintesound;
         Sinte.Play();
         this.cargas--;
-        cargastext.text = cargas.ToString(); 
+
 
     }
 
