@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
 {
-    [SerializeField] PlayerHealth playerHealth;
+    [SerializeField] DeadVerify player;
     [SerializeField] Animator hudAnim;
 
     [SerializeField] AudioClip gameoverSound;
@@ -19,23 +19,30 @@ public class GameOverManager : MonoBehaviour
         levelAudio = GetComponent<AudioSource>();
     }
 
-    void Update()
+    void Start()
     {
-        if (playerHealth.cmurio == true)
+        player.death += GameOver;
+    }
+
+    private void OnDestroy()
+    {
+        player.death -= GameOver;
+    }
+
+    private void GameOver()
+    {
+        hudAnim.SetBool("GameOver", true);
+        audioEffect.clip = gameoverSound;
+
+        if (!audioEffect.isPlaying && !sonido)
         {
-            hudAnim.SetBool("GameOver", true);
-            audioEffect.clip = gameoverSound;
+            audioEffect.Play();
+            sonido = true;
+        }
 
-            if (!audioEffect.isPlaying && !sonido)
-            {
-                audioEffect.Play();
-                sonido = true;
-            }
-
-            if (levelAudio != null)
-            {
-                levelAudio.pitch = 0.6f;
-            }
+        if (levelAudio != null)
+        {
+            levelAudio.pitch = 0.6f;
         }
     }
 }

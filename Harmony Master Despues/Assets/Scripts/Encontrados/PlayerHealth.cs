@@ -6,83 +6,64 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    [Header("Vida")]
+    [SerializeField] int startingHealth = 100;
     public int currentHealth;
-    public Slider healthSlider;
-    public Image damageImage;
-    public float flashSpeed = 5f;
-    public float timer;
-    public bool empezartiempo;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
-    public Rigidbody2D PlayerRigidbody;
-    bool isDead;
-    bool damaged;
+    [Header("UI")]
+    [SerializeField] Slider healthSlider;
+    [SerializeField] Image damageImage;
+    [SerializeField] float flashSpeed = 5f;
+    [SerializeField] Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
-    public Animator anim;
-    public bool cmurio;
-    
-    public Transform resurreccion;
+    float timer;
+    private bool empezartiempo;
 
-    public bool animpia;
-    public bool animcla;
-    public bool animboni;
-    public bool animarpita;
 
-    public AudioClip oof;
-    AudioSource duele;
+    private Rigidbody2D PlayerRigidbody;
+    private bool damaged;
+
+    private Animator anim;
+
+    [SerializeField] AudioClip damageSound;
+    AudioSource audio;
+    DeadVerify deadVerify;
 
     void Awake()
     {
-
-        //playerAudio = GetComponent<AudioSource>();
-        //playerMovement = GetComponent<PlayerMovement>();
-        //playerShooting = GetComponentInChildren <PlayerShooting> ();
+        PlayerRigidbody = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
-        duele = GetComponent<AudioSource>();
-        
+        deadVerify = GetComponent<DeadVerify>();
     }
 
+    private void Start()
+    {
+        deadVerify.death += Morir;
+    }
+
+    private void OnDestroy()
+    {
+        deadVerify.death -= Morir;
+    }
 
     void Update()
     {
         healthSlider.value = currentHealth;
-        if (damaged==true)
+
+        if (damaged)
         {
-            duele.clip = oof;
-            duele.Play();
+            audio.clip = damageSound;
+            audio.Play();
             damageImage.color = flashColour;
         }
+
         else
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
-
-        if (currentHealth <= 0)
-        {
-            PlayerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-            
-            cmurio = true;
-            animpia = false;
-            animcla = false;
-            animboni = false;
-            animarpita = false;
-
-            anim.SetBool("sinte", animpia);
-            anim.SetBool("flauta", animcla);
-            anim.SetBool("bongos", animboni);
-            anim.SetBool("arpa", animarpita);
-            anim.SetTrigger("muerto");
-            empezartiempo = true;
-            
-
-        }
-        else
-        {
-            cmurio = false;
-        }
 
         if (empezartiempo)
         {
@@ -92,9 +73,6 @@ public class PlayerHealth : MonoBehaviour
                 revivir();
             }
         }
-
-        
-        
     }
 
     public void revivir()
@@ -102,23 +80,27 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-  
+
     public void TakeDamage(int attackDamage)
     {
         damaged = true;
         currentHealth = Mathf.Clamp(currentHealth - attackDamage, 0, startingHealth);
         currentHealth -= attackDamage;
-       
-   
     }
-
-    
-   
-
 
     public void RestartLevel()
     {
         SceneManager.LoadScene("Nivel 1");
     }
+
+    private void Morir()
+    {
+        PlayerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("sinte", false);
+        anim.SetBool("flauta", false);
+        anim.SetTrigger("muerto");
+        empezartiempo = true;
+    }
 }
+
 
